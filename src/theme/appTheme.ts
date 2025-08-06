@@ -12,5 +12,12 @@ export const styles = StyleSheet.create({
         fontSize: 15,
         color: PRYIMARY_COLOR,
         paddingVertical: 10
+    },
+    containerForm:{
+        marginVertical:10
+    },
+    contenedorBotones:{
+        flexDirection:'row',
+        justifyContent:'center'
     }
 })
