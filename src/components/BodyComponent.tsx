@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import { StyleSheet, Text, useWindowDimensions, View } from 'react-native'
 import { SECONDARY_COLOR, TERTIARY_COLOR } from '../commons/constants'
 
+
 //componente reutiliable
 interface Props{
     children: ReactNode;    //cualquier tipo de elemento (img, texto)

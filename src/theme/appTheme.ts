@@ -17,7 +17,19 @@ export const styles = StyleSheet.create({
         marginVertical:10
     },
     contenedorBotones:{
-        flexDirection:'row',
+        alignSelf:'center',
         justifyContent:'center'
+    },
+    iconForm:{
+        position:'absolute',
+        bottom:16.5,
+        right:12
+    },
+    textRedirect:{
+        fontSize:16,
+        fontWeight:'bold',
+        color: PRYIMARY_COLOR,
+        textAlign:'center',
+        marginTop:20
     }
 })

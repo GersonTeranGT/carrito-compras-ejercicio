@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
         borderRadius:15,marginVertical:10,
         width:90,
         marginRight:12,
-        boxShadow:'5px 5px 12px rgba(15, 14, 14, 0.5)'
+        boxShadow:'5px 5px 12px rgba(15, 14, 14, 0.5)',
+        alignSelf:'center'
     },
     buttonText:{
         textAlign:'center',
