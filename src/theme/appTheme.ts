@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { PRYIMARY_COLOR, SECONDARY_COLOR } from '../commons/constants';
+import { INPUT_COLOR, PRYIMARY_COLOR, SECONDARY_COLOR } from '../commons/constants';
 
 export const styles = StyleSheet.create({
     titleWelcome: {
@@ -16,10 +16,6 @@ export const styles = StyleSheet.create({
     containerForm:{
         marginVertical:10
     },
-    contenedorBotones:{
-        alignSelf:'center',
-        justifyContent:'center'
-    },
     iconForm:{
         position:'absolute',
         bottom:16.5,
@@ -31,5 +27,23 @@ export const styles = StyleSheet.create({
         color: PRYIMARY_COLOR,
         textAlign:'center',
         marginTop:20
-    }
+    },
+    containerModal:{
+        flex:1,
+        backgroundColor: 'rgba(0,0,0,0.5)' ,
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius:10,
+    },
+    modal:{
+        padding:20,
+        margin:15,
+        backgroundColor: INPUT_COLOR,
+        borderRadius:10
+    },
+    image: {
+        height: 100,
+        width: 100,
+        marginRight: 10
+    },
 })

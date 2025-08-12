@@ -8,6 +8,12 @@ import { InputComponent } from '../components/InputComponent';
 import { ButtonComponent } from '../components/ButtonComponent';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { CommonActions, useNavigation } from '@react-navigation/native';
+import { User } from '../navigator/StackNavigator';
+
+//interface para las priopiedades
+interface Props{
+    users: User[];  //arreglo con la lista de usuarios
+}
 
 //interface para el objeto del formulario
 interface FormLogin {
@@ -15,20 +21,7 @@ interface FormLogin {
     password: string;
 }
 
-//INTERFACE PATRA LOS OBJETOS DE MI ARREGLO USERS
-interface User {
-    id: number;
-    name: string;
-    username: string;
-    password: string;
-}
-//ARREGLO CON LA LISTA DE USUARIOS
-const users: User[] = [
-    { id: 1, name: 'Gerson Teran', username: 'GuapyGT', password: '123456' },
-    { id: 2, name: 'Kennet Gerardo', username: 'Kenflow', password: '567890' }
-];
-
-export const LoginScreen = () => {
+export const LoginScreen = ({users}:Props) => {
     //hook useNavigation para navegar entre pantallas
     const navigation = useNavigation();
     //hook useState para manejar el estado del formulario
@@ -63,10 +56,10 @@ export const LoginScreen = () => {
             Alert.alert('Error', 'Usuario y/o conytraseña incorrectos')
             return;
         }
-        console.log(formLogin);
-        }
-        
-    
+        //console.log(formLogin);
+        navigation.dispatch(CommonActions.navigate({name: 'Home'}));
+    }
+
 
     return (
         <View >
@@ -86,7 +79,7 @@ export const LoginScreen = () => {
                         onPress={() => setHiddenPassword(!hiddenPassword)} />
                 </View>
                 
-                    <ButtonComponent text='Ingresar' handleLogin={handleLogin} />
+                    <ButtonComponent text='Ingresar' onPress={handleLogin} />
                     {/* <ButtonComponent text='Registrate' handleLogin={()=> navigation.dispatch(CommonActions.navigate({name:'Register'}))}/> */}
                     <TouchableOpacity onPress={()=> navigation.dispatch(CommonActions.navigate({name: 'Register'}))}>
                         <Text style={styles.textRedirect}>No tienes una cuenta? Regístrate ahora</Text>

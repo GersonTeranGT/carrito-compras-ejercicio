@@ -6,12 +6,12 @@ import { SECONDARY_COLOR, TERTIARY_COLOR } from '../commons/constants'
 interface Props { //propiedades-> valores desde otros lugares
     text: string;
     //onPress:()=>void
-    handleLogin: ()=>void;
+    onPress: ()=>void;
     //son como los nombres
 }
-export const ButtonComponent = ({text, handleLogin}:Props) => {
+export const ButtonComponent = ({text, onPress}:Props) => {
     return (
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
             <Text style={styles.buttonText} >{text}</Text>
         </TouchableOpacity>
     )
