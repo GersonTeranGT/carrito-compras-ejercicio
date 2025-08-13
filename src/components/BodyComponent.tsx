@@ -14,7 +14,7 @@ export const BodyComponent = ({children}: Props) => {
     return (
         <View style={{
             ...styles.container,
-            height: height * 0.88
+            height: height * 0.825
         }}>
             {children}
         </View>
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         backgroundColor: TERTIARY_COLOR,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        paddingHorizontal: 40,
+        paddingHorizontal: 20,
         paddingTop: 30
     }
 })

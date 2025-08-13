@@ -35,14 +35,13 @@ export const CardProduct = ({ item , updateStock}: Props) => {
 const styles = StyleSheet.create({
     container: {
         //flexDirection: 'row',
-        padding: 15,
+        padding: 16,
         backgroundColor: INPUT_COLOR,
         alignItems: 'center',
         borderRadius: 20,
         elevation: 7,
         margin: 8,
         justifyContent:'center'
-
     },
     title: {
         fontSize: 15,
