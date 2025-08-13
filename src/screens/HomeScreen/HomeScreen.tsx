@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FlatList, StatusBar, Text, View } from 'react-native'
 import { PRYIMARY_COLOR } from '../../commons/constants'
 import { TitleComponent } from '../../components/TitleComponent'
@@ -15,12 +15,21 @@ export interface Product {
     pathImage: string;
 }
 
+//interfaz para el reglo carrito
+interface Cart{
+    id: number;
+    name: string;
+    price: number;
+    quantity: number;
+    total: number;
+}
+
 export const HomeScreen = () => {
     //arreglo con una lista de productos
     const products: Product[] = [
-        { id: 1, name: 'Funda de arroz', price: 3.30, stock: 5, pathImage: 'https://www.supermaxi.com/wp-content/uploads/2024/08/7861035010142-1-1.jpg' },
+        { id: 1, name: 'Funda de arroz', price: 3.30, stock: 0, pathImage: 'https://www.supermaxi.com/wp-content/uploads/2024/08/7861035010142-1-1.jpg' },
         { id: 2, name: 'Funda de azucar', price: 2.50, stock: 7, pathImage: 'https://www.supermercadosantamaria.com/documents/10180/10504/160653107_M.jpg' },
-        { id: 3, name: 'Funda de papas', price: 1.70, stock: 10, pathImage: 'https://www.eureka.com.ec/clasica/747-large_default/papas-fritas-naturales-ruffles-400-g.jpg' },
+        { id: 3, name: 'Funda de papas', price: 1.70, stock: 0, pathImage: 'https://www.eureka.com.ec/clasica/747-large_default/papas-fritas-naturales-ruffles-400-g.jpg' },
         { id: 4, name: 'Funda de fideos', price: 2.00, stock: 4, pathImage: 'https://www.supermercadosantamaria.com/documents/10180/10504/133101593_M.jpg' },
         { id: 5, name: 'Funda de sal', price: 0.50, stock: 8, pathImage: 'https://distribuidoracampos.com/wp-content/uploads/2023/01/CRIS-SAL-2KG-pvp-0.95.jpg' },
         { id: 6, name: 'Funda de arroz', price: 3.30, stock: 5, pathImage: 'https://www.supermaxi.com/wp-content/uploads/2024/08/7861035010142-1-1.jpg' },
@@ -28,8 +37,49 @@ export const HomeScreen = () => {
         { id: 8, name: 'Funda de papas', price: 1.70, stock: 10, pathImage: 'https://www.eureka.com.ec/clasica/747-large_default/papas-fritas-naturales-ruffles-400-g.jpg' },
         { id: 9, name: 'Funda de fideos', price: 2.00, stock: 4, pathImage: 'https://www.supermercadosantamaria.com/documents/10180/10504/133101593_M.jpg' },
         { id: 10, name: 'Funda de sal', price: 0.50, stock: 8, pathImage: 'https://distribuidoracampos.com/wp-content/uploads/2023/01/CRIS-SAL-2KG-pvp-0.95.jpg' },
-
     ];
+
+    //hook useState para maejar ele estado de los productos
+    const [listProducts, setListProducts] = useState<Product[]>(products)  //arreglo de productos
+
+    //hook useState para controlar los productos del carrito
+    const [cart, setCart] = useState<Cart[]>([]);   //arreglo con los productos seleccionados
+
+    //funcion para actualizar el stock
+    const updateStock = (id: number, quantity: number): void => {
+        //fuincion map genera un nuevo arreglo
+        const updateProducts = listProducts.map(product => product.id == id
+            ? { ...product, stock: product.stock - quantity }
+            : product);
+        //actualizar producto en el arreglo
+        setListProducts(updateProducts);
+        //lamar funcion para añadir al carrito
+        addProduct(id, quantity)
+    }
+
+    //funcion para agregar los produtos al carrito
+    const addProduct = (id: number, quantity: number): void => {
+        const product = listProducts.find(product => product.id == id);
+
+        //validar si existe el producto
+        if(!product){
+            return;
+        }
+
+        //crear produicto para el carrito
+        const newProductCart: Cart = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity: quantity,
+            total: product.price * quantity
+        }
+
+        //añadir en el carrito
+        setCart([...cart, newProductCart])
+        console.log(cart)
+
+    }
 
     return (
         <View>
@@ -37,11 +87,11 @@ export const HomeScreen = () => {
             <TitleComponent title='Registrate' />
             <BodyComponent>
                 <FlatList
-                    data={products}
-                    renderItem={({ item }) => <CardProduct item={item} />}
+                    data={listProducts}
+                    renderItem={({ item }) => <CardProduct item={item} updateStock={updateStock}/>}
                     keyExtractor={item => item.id.toString()}
                     numColumns={2}
-                    columnWrapperStyle={{justifyContent: 'space-between'}}
+                    columnWrapperStyle={{ justifyContent: 'space-between' }}
                 />
             </BodyComponent>
         </View>
